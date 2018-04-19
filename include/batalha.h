@@ -6,8 +6,6 @@ using std::cin;
 using std::cout;
 using std::endl;
 
-#include "acoes.h"
-
 #include "monstro.h"
 
 class Batalha {

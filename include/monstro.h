@@ -7,7 +7,27 @@ using std::ostream;
 #include <istream>
 using std::istream;
 
-#include "acoes.h"
+enum ACAO {
+	MELHORAR_ATRIBUTO,
+	ATAQUE_FISICO,
+	ATAQUE_MAGICO,
+	DEFESA
+};
+
+enum ATRIBUTO {
+	VIDA_ATUAL,
+	FORCA_FISICA,
+	FORCA_MAGICA,
+	DEFESA_FISICA,
+	DEFESA_MAGICA
+};
+
+enum ClasseMonstro {
+	BALANCEADO,
+	GUERREIRO,
+	MAGO,
+	TANKER
+};
 
 class Monstro {
 	private:
@@ -32,7 +52,7 @@ class Monstro {
 	public:
 		static int ID;
 
-		Monstro(int vida, int forcaFisica, int forcaMagica, int defesaFisica, int defesaMagica);
+		Monstro(ClasseMonstro classe);
 		Monstro();
 		~Monstro();
 

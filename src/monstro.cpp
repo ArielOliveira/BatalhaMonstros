@@ -1,12 +1,23 @@
 #include "monstro.h"
 
-Monstro::Monstro(int vida, int forcaFisica, int forcaMagica, int defesaFisica, int defesaMagica) {
-	this->vida = vida;
-	this->vidaAtual = vida;
-	this->forcaFisica = forcaFisica;
-	this->forcaMagica = forcaMagica;
-	this->defesaFisica = defesaFisica;
-	this->defesaMagica = defesaMagica;
+#include <iostream>
+using std::cout;
+using std::endl;
+
+#include "fileHandler.h"
+
+Monstro::Monstro(ClasseMonstro classe) {
+	ifstream file;
+	file.open("./data/classes_monstros");
+
+	if (!file) {
+		cout << "Erro ao abrir arquivo!" << endl;
+	} else {
+		readFile(file, classe);
+		file >> *this;
+	}
+
+	this->classe = classe;
 
 	ID++;
 }
@@ -68,9 +79,9 @@ void Monstro::acao(Monstro *monstro, ACAO acao, ATRIBUTO atributo) {
 
 Monstro::~Monstro() {}
 
-void setClasseMonstro(ClasseMonstro classe) {this->classe = classe;}
+void Monstro::setClasseMonstro(ClasseMonstro classe) {this->classe = classe;}
 
-ClasseMonstro getClasseMonstro() {return classe;}
+ClasseMonstro Monstro::getClasseMonstro() {return classe;}
 
 void Monstro::setVida(int vida) {
 	this->vida = vida;

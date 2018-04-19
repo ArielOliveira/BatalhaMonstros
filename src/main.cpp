@@ -6,7 +6,6 @@ using std::endl;
 #include "monstro.h"
 #include "batalha.h"
 #include "IA.h"
-#include "fileHandler.h"
 
 int Monstro::ID = 0;
 
@@ -25,22 +24,13 @@ int selecionarClasse() {
 }
 
 int main() {
-	Monstro *monstro = new Monstro();
 	IA *ia = new IA();
 
 	ia->exibirMonstro();
 
 	int classe = selecionarClasse();
 
-	ifstream file;
-	file.open("./data/classes_monstros");
-
-	if (!file) {
-		cout << "Erro ao abrir arquivo!" << endl;
-	} else {
-		readFile(file, classe);
-		file >> *monstro;
-	}
+	Monstro *monstro = new Monstro((ClasseMonstro)classe);
 
 	cout << *monstro;
 

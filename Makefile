@@ -15,10 +15,10 @@ $(batalha): $(OBJS)
 ./build/main.o: ./src/main.cpp ./include/fileHandler.h
 	$(CC) -c $(CPPFLAGS) $<	-o $@
 
-./build/monstro.o: ./src/monstro.cpp ./include/monstro.h ./include/acoes.h
+./build/monstro.o: ./src/monstro.cpp ./include/monstro.h
 	$(CC) -c $(CPPFLAGS) $<	-o $@	
 
-./build/batalha.o: ./src/batalha.cpp ./include/batalha.h ./include/acoes.h
+./build/batalha.o: ./src/batalha.cpp ./include/batalha.h
 	$(CC) -c $(CPPFLAGS) $<	-o $@	
 
 ./build/IA.o: ./src/IA.cpp ./include/IA.h
