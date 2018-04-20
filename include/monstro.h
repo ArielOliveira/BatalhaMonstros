@@ -7,6 +7,14 @@ using std::ostream;
 #include <istream>
 using std::istream;
 
+#include <string>
+using std::string;
+
+const string classes[] = {"BALANCEADO",
+						  "GUERREIRO", 
+						  "MAGO", 
+						  "TANKER"};
+
 enum ACAO {
 	MELHORAR_ATRIBUTO,
 	ATAQUE_FISICO,

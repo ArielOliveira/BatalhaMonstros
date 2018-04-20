@@ -43,24 +43,24 @@ void Monstro::ataqueMagico(Monstro *monstro) {
 
 void Monstro::defesa(Monstro *monstro, short int defesa) {
 	switch(defesa) {
-		case DEFESA_FISICA: vidaAtual -= monstro->getForcaFisica()-defesaFisica;
+		case DEFESA_FISICA: vidaAtual -= (defesaFisica-monstro->getForcaFisica())/2;
 			break;
-		case DEFESA_MAGICA: vidaAtual -= monstro->getForcaMagica()-defesaMagica;
+		case DEFESA_MAGICA: vidaAtual -= (defesaMagica-monstro->getForcaMagica())/2;
 			break;
 	}
 }
 		
 void Monstro::melhorarAtributo(ATRIBUTO atributo) {
 	switch(atributo) {
-		case VIDA_ATUAL: vidaAtual += 10;
+		case VIDA_ATUAL: vidaAtual += 150;
 			break;
-		case FORCA_FISICA: forcaFisica += 5;
+		case FORCA_FISICA: forcaFisica += 100;
 			break;
-		case FORCA_MAGICA: forcaMagica += 5;
+		case FORCA_MAGICA: forcaMagica += 100;
 			break;
-		case DEFESA_FISICA: defesaFisica += 5;
+		case DEFESA_FISICA: defesaFisica += 50;
 			break;
-		case DEFESA_MAGICA: defesaMagica += 5;
+		case DEFESA_MAGICA: defesaMagica += 50;
 			break;
 	}
 }
@@ -104,7 +104,8 @@ void Monstro::setDefesaMagica(int defesaMagica) {this->defesaMagica = defesaMagi
 int Monstro::getDefesaMagica() {return defesaMagica;}
 
 ostream& operator<< (ostream &o, Monstro const _monstro) {
-	o << "Vida atual: " << _monstro.vida << "/" << _monstro.vidaAtual << "\n"
+	o << "CLasse: " << classes[_monstro.classe] << "\n"
+	  << "Vida atual: " << _monstro.vida << "/" << _monstro.vidaAtual << "\n"
 	  << "Força Física: " << _monstro.forcaFisica << "\n"	 
 	  << "Força Magica: " << _monstro.forcaMagica << "\n"
 	  << "Defesa Física: " << _monstro.defesaFisica << "\n"

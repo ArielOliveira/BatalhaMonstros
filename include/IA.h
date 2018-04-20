@@ -6,7 +6,7 @@
 #include "monstro.h"
 
 class IA {
-	private:
+	protected:
 		Monstro *monstro_ia;
 
 	public:
@@ -14,10 +14,26 @@ class IA {
 		static std::mt19937 gen;
 		static std::uniform_int_distribution<> dis;
 
+		IA(ClasseMonstro classe);
 		IA();
 		~IA();
 
 		void exibirMonstro();
+
+		virtual void jogarIA() = 0;
+};
+
+class Guerreiro : public IA {
+	public:
+		Guerreiro(ClasseMonstro classe): IA(classe) {}	
+};
+
+class Mago : public IA {
+	
+};
+
+class Tanker : public IA {
+	
 };
 
 #endif
