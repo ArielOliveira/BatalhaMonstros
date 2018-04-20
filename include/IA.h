@@ -9,6 +9,7 @@ class IA {
 	protected:
 		Monstro *monstro_ia;
 
+		int danoCausado;
 	public:
 		static std::random_device rd;
 		static std::mt19937 gen;
@@ -20,20 +21,33 @@ class IA {
 
 		void exibirMonstro();
 
-		virtual void jogarIA() = 0;
+		virtual void jogarIA();
 };
 
 class Guerreiro : public IA {
 	public:
-		Guerreiro(ClasseMonstro classe): IA(classe) {}	
+		Guerreiro(): IA(GUERREIRO) {}
+		~Guerreiro() {}
+
+		void jogarIA() {
+
+		}
 };
 
 class Mago : public IA {
-	
+	public:
+		Mago(): IA(MAGO) {}
+		~Mago() {}
+
+		void jogarIA();
 };
 
 class Tanker : public IA {
-	
+	public:
+		Tanker(): IA(TANKER) {}
+		~Tanker() {}
+
+		void jogarIA();
 };
 
 #endif

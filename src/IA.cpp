@@ -12,8 +12,7 @@ IA::IA(ClasseMonstro classe) {
 }
 
 IA::IA() {
-	std::uniform_int_distribution<> dis((int)GUERREIRO, (int)TANKER);
-	monstro_ia = new Monstro((ClasseMonstro)std::round(dis(gen)));
+	monstro_ia = new Monstro();
 }
 
 IA::~IA() {}
@@ -21,3 +20,5 @@ IA::~IA() {}
 void IA::exibirMonstro() {
 	cout << *monstro_ia;
 }
+
+void IA::jogarIA() {}

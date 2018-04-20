@@ -23,8 +23,29 @@ int selecionarClasse() {
 	return valor;
 }
 
+IA* iniciarIA() {
+	IA *ia;
+
+	std::uniform_int_distribution<> dis((int)GUERREIRO, (int)TANKER);
+
+	ClasseMonstro classe = (ClasseMonstro)std::round(dis(IA::gen));
+
+	switch(classe) {
+		case GUERREIRO: ia = new Guerreiro();
+			break;
+		case MAGO: ia = new Mago();
+			break;
+		case TANKER: ia = new Tanker();
+			break;
+		default:
+			break;
+	}
+
+	return ia;
+}
+
 int main() {
-	IA *ia = new IA();
+	IA *ia = iniciarIA();
 
 	ia->exibirMonstro();
 
