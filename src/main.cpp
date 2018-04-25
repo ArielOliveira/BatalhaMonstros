@@ -5,7 +5,6 @@ using std::endl;
 
 #include "monstro.h"
 #include "batalha.h"
-#include "IA.h"
 
 int Monstro::ID = 0;
 
@@ -23,31 +22,34 @@ int selecionarClasse() {
 	return valor;
 }
 
-IA* iniciarIA() {
-	IA *ia;
 
-	std::uniform_int_distribution<> dis((int)GUERREIRO, (int)TANKER);
 
-	ClasseMonstro classe = (ClasseMonstro)std::round(dis(IA::gen));
+Jogada escolherJogada() {
+	int valor1, valor2;
 
-	switch(classe) {
-		case GUERREIRO: ia = new Guerreiro();
-			break;
-		case MAGO: ia = new Mago();
-			break;
-		case TANKER: ia = new Tanker();
-			break;
-		default:
-			break;
+	cout << "Escolha sua Jogada: " << endl;
+	cout << "\t0 - Ataque Físico" << endl;
+	cout << "\t1 - Ataque Mágico" << endl;
+	cout << "\t2 - Melhorar Atributo" << endl;
+
+	cin >> valor1;
+	valor2 = valor1;
+
+	if (valor1 == 2) {
+		cout << "Escolha o Atributo: " << endl;
+		cout << "\t0 - Vida Atual" << endl;
+		cout << "\t1 - Força Física" << endl;
+		cout << "\t2 - Força Mágica" << endl;
+		cout << "\t3 - Defesa Física" << endl;
+		cout << "\t4 - Defesa Mágica" << endl;
+
+		cin >> valor2;
 	}
 
-	return ia;
+	return Jogada((ACAO)valor1, (ATRIBUTO)valor2);
 }
 
 int main() {
-	IA *ia = iniciarIA();
-
-	ia->exibirMonstro();
 
 	int classe = selecionarClasse();
 
@@ -55,7 +57,11 @@ int main() {
 
 	cout << *monstro;
 
-	//while(batalha->ninguemMorreu()) {}
+	Batalha *batalha = new Batalha(monstro);
+
+	while(batalha->ninguemMorreu()) {
+
+	}
 
 	return 0;
 }

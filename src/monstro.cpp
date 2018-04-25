@@ -19,6 +19,8 @@ Monstro::Monstro(ClasseMonstro classe) {
 
 	this->classe = classe;
 
+	melhorouAtributo = false;
+
 	ID++;
 }
 
@@ -29,6 +31,8 @@ Monstro::Monstro() {
 	forcaMagica = 0;
 	defesaFisica = 0;
 	defesaMagica = 0;
+
+	melhorouAtributo = false;
 
 	ID++;
 }
@@ -43,9 +47,9 @@ void Monstro::ataqueMagico(Monstro *monstro) {
 
 void Monstro::defesa(Monstro *monstro, short int defesa) {
 	switch(defesa) {
-		case DEFESA_FISICA: vidaAtual -= (defesaFisica-monstro->getForcaFisica())/2;
+		case DEFESA_FISICA: vidaAtual -= (monstro->getForcaFisica())-defesaFisica;
 			break;
-		case DEFESA_MAGICA: vidaAtual -= (defesaMagica-monstro->getForcaMagica())/2;
+		case DEFESA_MAGICA: vidaAtual -= (monstro->getForcaMagica())-defesaMagica;
 			break;
 	}
 }
@@ -54,7 +58,7 @@ void Monstro::melhorarAtributo(ATRIBUTO atributo) {
 	switch(atributo) {
 		case VIDA_ATUAL: vidaAtual += 150;
 			break;
-		case FORCA_FISICA: forcaFisica += 100;
+		case FORCA_FISICA: forcaFisica += 150;
 			break;
 		case FORCA_MAGICA: forcaMagica += 100;
 			break;

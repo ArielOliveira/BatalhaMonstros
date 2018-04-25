@@ -7,26 +7,29 @@ using std::cout;
 using std::endl;
 
 #include "monstro.h"
+#include "IA.h"
 
 class Batalha {
 	private:
-		Monstro *monstro_1;
-		Monstro *monstro_2;
+		Monstro *monstroPlayer;
+		IA *ia;
 
 		bool alguemMorreu;
 
 		int turnos;
 
+		void iniciarIA();
+
 	public:
-		Batalha(Monstro *monstro_1, Monstro *monstro_2);
+		Batalha(Monstro *monstroPlayer);
 		Batalha();
 		~Batalha();
 
 		void setup();
 
-		void jogar(ACAO acao, ATRIBUTO atributo);
+		void jogar(Jogada jogada);
 
-		void setMonstro(Monstro *monstro, int ID);
+		void setMonstro(Monstro *monstroPlayer, int ID);
 		Monstro getMonstro(int ID);
 
 		bool ninguemMorreu();

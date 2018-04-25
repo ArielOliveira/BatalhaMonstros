@@ -5,10 +5,27 @@
 
 #include "monstro.h"
 
+class Jogada {
+	private:
+		ACAO acao;
+		ATRIBUTO atributo;
+	public:
+		Jogada(ACAO acao, ATRIBUTO atributo): acao(acao), atributo(atributo) {}
+		Jogada() {}
+		~Jogada() {}
+
+		void setAcao(ACAO acao) {this->acao = acao;}
+		ACAO getAcao() {return acao;}
+
+		void setAtributo(ATRIBUTO atributo) {this->atributo = atributo;}
+		ATRIBUTO getAtributo() {return atributo;}
+};
+
 class IA {
 	protected:
 		Monstro *monstro_ia;
 
+		int danoRecebido;
 		int danoCausado;
 	public:
 		static std::random_device rd;
@@ -21,7 +38,9 @@ class IA {
 
 		void exibirMonstro();
 
-		virtual void jogarIA();
+		Monstro* getMonstro();
+
+		virtual Jogada jogarIA() = 0;
 };
 
 class Guerreiro : public IA {
@@ -29,9 +48,7 @@ class Guerreiro : public IA {
 		Guerreiro(): IA(GUERREIRO) {}
 		~Guerreiro() {}
 
-		void jogarIA() {
-
-		}
+		Jogada jogarIA();
 };
 
 class Mago : public IA {
@@ -39,15 +56,18 @@ class Mago : public IA {
 		Mago(): IA(MAGO) {}
 		~Mago() {}
 
-		void jogarIA();
+		Jogada jogarIA();
 };
 
 class Tanker : public IA {
+	private:
+		Jogada *jogada;
+
 	public:
 		Tanker(): IA(TANKER) {}
 		~Tanker() {}
 
-		void jogarIA();
+		Jogada jogarIA();
 };
 
 #endif

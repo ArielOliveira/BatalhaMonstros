@@ -50,6 +50,8 @@ class Monstro {
 		int defesaFisica;
 		int defesaMagica;
 
+		bool melhorouAtributo;
+
 		void ataqueMagico(Monstro *monstro);
 		void ataqueFisico(Monstro *monstro);
 

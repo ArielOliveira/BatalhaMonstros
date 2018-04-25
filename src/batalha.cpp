@@ -1,60 +1,44 @@
 #include "batalha.h"
 
-Batalha::Batalha(Monstro *monstro_1, Monstro *monstro_2) {
-	this->monstro_1 = monstro_1;
-	this->monstro_2 = monstro_2;
-
+Batalha::Batalha(Monstro *monstroPlayer): monstroPlayer(monstroPlayer) {
+	turnos = 0;
 	alguemMorreu = false;
 
-	turnos = 0;
+	iniciarIA();
 }
-Batalha::Batalha() {
-	monstro_1 = 0;
-	monstro_2 = 0;
 
+Batalha::Batalha() {
+	monstroPlayer = 0;
+	turnos = 0;
 	alguemMorreu = false;
 
-	turnos = 0;
+	iniciarIA();
 }
 
 Batalha::~Batalha() {}
 
-void Batalha::setup() {
-	int valor;
+void Batalha::iniciarIA() {
+	std::uniform_int_distribution<> dis((int)GUERREIRO, (int)TANKER);
 
-	cout << "Insira os atributos do seu monstro: " << endl;
-	
-	cout << "Vida: ";
-	cin >> valor;
-	cout << endl;
-	monstro_1->setVida(valor);
-	
-	cout << "Força Física: ";
-	cin >> valor;
-	cout << endl;
-	monstro_1->setForcaFisica(valor);
+	ClasseMonstro classe = (ClasseMonstro)std::round(dis(IA::gen));
 
-	cout << "Defesa Física: ";
-	cin >> valor;
-	cout << endl;
-	monstro_1->setDefesaFisica(valor);
-
-	cout << "Força Mágica: ";
-	cin >> valor;
-	cout << endl;
-	monstro_1->setForcaMagica(valor);
-
-	cout << "Defesa Mágica: ";
-	cin >> valor;
-	cout << endl;
-	monstro_1->setDefesaMagica(valor);
+	switch(classe) {
+		case GUERREIRO: ia = new Guerreiro();
+			break;
+		case MAGO: ia = new Mago();
+			break;
+		case TANKER: ia = new Tanker();
+			break;
+		default:
+			break;
+	}
 }
 
-void Batalha::jogar(ACAO acao, ATRIBUTO atributo) {
-	switch(acao) {
-		case MELHORAR_ATRIBUTO: monstro_1->acao(NULL, acao, atributo);
+void Batalha::jogar(Jogada jogada) {
+	switch(jogada.getAcao()) {
+		case MELHORAR_ATRIBUTO: monstroPlayer->acao(NULL, jogada.getAcao(), jogada.getAtributo());
 			break;
-		default: monstro_1->acao(monstro_2, acao, atributo);
+		default: monstroPlayer->acao(ia->getMonstro(), jogada.getAcao(), jogada.getAtributo());
 			break;
 	}
 
@@ -73,16 +57,13 @@ void Batalha::jogar(ACAO acao, ATRIBUTO atributo) {
 	turnos++;
 }
 
-void Batalha::setMonstro(Monstro *monstro, int ID) {
-	if (ID == 1 && (!monstro_1)) {
-		this->monstro_1 = monstro;
-	}
-	if (ID == 2 && (!monstro_2)) {
-		this->monstro_2 = monstro;
+void Batalha::setMonstro(Monstro *monstroPlayer) {
+	if (ID == 1 && (!monstroPlayer)) {
+		this->monstroPlayer = monstroPlayer;
 	}
 }
 
-Monstro Batalha::getMonstro(int ID) {return *monstro_1;}
+Monstro Batalha::getMonstro(int ID) {return *monstroPlayer;}
 
 bool Batalha::ninguemMorreu() {
 	if (alguemMorreu) 

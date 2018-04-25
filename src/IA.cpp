@@ -21,4 +21,43 @@ void IA::exibirMonstro() {
 	cout << *monstro_ia;
 }
 
-void IA::jogarIA() {}
+Monstro* getMonstro() {return monstro_ia;}
+
+Jogada Guerreiro::jogarIA() {
+	Jogada jogada;
+
+	if (monstro_ia->getVidaAtual() > monstro_ia->getVida()/(monstro_ia->getVida()/30)) {
+		jogada = Jogada(ATAQUE_FISICO, FORCA_FISICA);
+	} else {
+		jogada = Jogada(MELHORAR_ATRIBUTO, VIDA_ATUAL);
+	}
+
+	return jogada;
+}
+
+Jogada Mago::jogarIA() {
+	Jogada jogada;
+
+	if (monstro_ia->getVidaAtual() > monstro_ia->getVida()/(monstro_ia->getVida()/30)) {
+		jogada = Jogada(ATAQUE_MAGICO, FORCA_MAGICA);
+	} else {
+		jogada = Jogada(MELHORAR_ATRIBUTO, VIDA_ATUAL);
+	}
+
+	return jogada;
+}
+
+Jogada Tanker::jogarIA() {
+	if (!jogada) {
+		jogada = new Jogada(MELHORAR_ATRIBUTO, FORCA_FISICA);
+
+	} else if (monstro_ia->getVidaAtual() > monstro_ia->getVida()/(monstro_ia->getVida()/30)) {
+		jogada->setAcao(ATAQUE_FISICO);
+		jogada->setAtributo(FORCA_FISICA);
+	} else {
+		jogada->setAcao(MELHORAR_ATRIBUTO);
+		jogada->setAtributo(VIDA_ATUAL);
+	}
+
+	return *jogada;
+}
