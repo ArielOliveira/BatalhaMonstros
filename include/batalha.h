@@ -19,6 +19,7 @@ class Batalha {
 		int turnos;
 
 		void iniciarIA();
+		void jogar(Jogada jogada, Monstro *monstro1, Monstro *monstro2);
 
 	public:
 		Batalha(Monstro *monstroPlayer);
@@ -27,10 +28,10 @@ class Batalha {
 
 		void setup();
 
-		void jogar(Jogada jogada);
+		void setJogada(Jogada jogada);
 
-		void setMonstro(Monstro *monstroPlayer, int ID);
-		Monstro getMonstro(int ID);
+		void setMonstro(Monstro *monstroPlayer);
+		Monstro getMonstro();
 
 		bool ninguemMorreu();
 };

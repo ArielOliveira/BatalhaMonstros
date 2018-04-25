@@ -34,36 +34,47 @@ void Batalha::iniciarIA() {
 	}
 }
 
-void Batalha::jogar(Jogada jogada) {
+void Batalha::jogar(Jogada jogada, Monstro *monstro1, Monstro *monstro2) {
 	switch(jogada.getAcao()) {
-		case MELHORAR_ATRIBUTO: monstroPlayer->acao(NULL, jogada.getAcao(), jogada.getAtributo());
+		case MELHORAR_ATRIBUTO: monstro1->acao(NULL, jogada.getAcao(), jogada.getAtributo());
 			break;
-		default: monstroPlayer->acao(ia->getMonstro(), jogada.getAcao(), jogada.getAtributo());
+		default: monstro1->acao(monstro2, jogada.getAcao(), jogada.getAtributo());
 			break;
 	}
+}
 
-	if (monstro_2->getVidaAtual() <= 0) {
+void Batalha::setJogada(Jogada jogada) {
+	jogar(jogada, monstroPlayer, ia->getMonstro());
+
+	if (ia->getMonstro()->getVidaAtual() <= 0) {
 		alguemMorreu = true;
 		return;
 	}
 
-	Monstro *aux = monstro_1;
-	
-	monstro_1 = monstro_2;
-	monstro_2 = aux;
-
-	aux = NULL;
-
 	turnos++;
-}
 
-void Batalha::setMonstro(Monstro *monstroPlayer) {
-	if (ID == 1 && (!monstroPlayer)) {
-		this->monstroPlayer = monstroPlayer;
+	Jogada jogadaIA = ia->jogadaIA();
+
+	jogar(jogadaIA, ia->getMonstro(), monstroPlayer);
+
+	if (jogadaIA.getAcao() == MELHORAR_ATRIBUTO) {
+		cout << "IA Escolheu ";
+	} else {
+		cout << "IA Usou ";
 	}
+
+	cout << acoes[jogadaIA.getAcao()] << endl;
+
+	if (monstroPlayer->getVidaAtual() <= 0) {
+		alguemMorreu = true;
+		return;
+	}
+
 }
 
-Monstro Batalha::getMonstro(int ID) {return *monstroPlayer;}
+void Batalha::setMonstro(Monstro *monstroPlayer) {this->monstroPlayer = monstroPlayer;}
+
+Monstro Batalha::getMonstro() {return *monstroPlayer;}
 
 bool Batalha::ninguemMorreu() {
 	if (alguemMorreu) 

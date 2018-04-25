@@ -108,12 +108,12 @@ void Monstro::setDefesaMagica(int defesaMagica) {this->defesaMagica = defesaMagi
 int Monstro::getDefesaMagica() {return defesaMagica;}
 
 ostream& operator<< (ostream &o, Monstro const _monstro) {
-	o << "CLasse: " << classes[_monstro.classe] << "\n"
-	  << "Vida atual: " << _monstro.vida << "/" << _monstro.vidaAtual << "\n"
-	  << "Força Física: " << _monstro.forcaFisica << "\n"	 
-	  << "Força Magica: " << _monstro.forcaMagica << "\n"
-	  << "Defesa Física: " << _monstro.defesaFisica << "\n"
-	  << "Defesa Mágica: " << _monstro.defesaMagica << "\n";
+	o << "Classe: " << classes[_monstro.classe] << "\n"
+	  << atributos[VIDA_ATUAL] << ": " << _monstro.vida << "/" << _monstro.vidaAtual << "\n"
+	  << atributos[FORCA_FISICA] << ": " << _monstro.forcaFisica << "\n"	 
+	  << atributos[FORCA_MAGICA] << ": " << _monstro.forcaMagica << "\n"
+	  << atributos[DEFESA_FISICA] << ": " << _monstro.defesaFisica << "\n"
+	  << atributos[DEFESA_MAGICA] << ": " << _monstro.defesaMagica << "\n";
 
 	return o; 	 	 
 }

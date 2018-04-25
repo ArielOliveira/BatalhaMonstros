@@ -9,6 +9,7 @@ class Jogada {
 	private:
 		ACAO acao;
 		ATRIBUTO atributo;
+		
 	public:
 		Jogada(ACAO acao, ATRIBUTO atributo): acao(acao), atributo(atributo) {}
 		Jogada() {}
@@ -27,6 +28,7 @@ class IA {
 
 		int danoRecebido;
 		int danoCausado;
+
 	public:
 		static std::random_device rd;
 		static std::mt19937 gen;
@@ -40,7 +42,7 @@ class IA {
 
 		Monstro* getMonstro();
 
-		virtual Jogada jogarIA() = 0;
+		virtual Jogada jogadaIA() = 0;
 };
 
 class Guerreiro : public IA {
@@ -48,7 +50,7 @@ class Guerreiro : public IA {
 		Guerreiro(): IA(GUERREIRO) {}
 		~Guerreiro() {}
 
-		Jogada jogarIA();
+		Jogada jogadaIA();
 };
 
 class Mago : public IA {
@@ -56,7 +58,7 @@ class Mago : public IA {
 		Mago(): IA(MAGO) {}
 		~Mago() {}
 
-		Jogada jogarIA();
+		Jogada jogadaIA();
 };
 
 class Tanker : public IA {
@@ -67,7 +69,7 @@ class Tanker : public IA {
 		Tanker(): IA(TANKER) {}
 		~Tanker() {}
 
-		Jogada jogarIA();
+		Jogada jogadaIA();
 };
 
 #endif

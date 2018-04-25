@@ -60,7 +60,9 @@ int main() {
 	Batalha *batalha = new Batalha(monstro);
 
 	while(batalha->ninguemMorreu()) {
+		Jogada jogada = escolherJogada();
 
+		batalha->setJogada(jogada);
 	}
 
 	return 0;
