@@ -50,8 +50,10 @@ Jogada Mago::jogadaIA() {
 Jogada Tanker::jogadaIA() {
 	if (!jogada) {
 		jogada = new Jogada(MELHORAR_ATRIBUTO, FORCA_FISICA);
+		return *jogada;
+	} 
 
-	} else if (monstro_ia->getVidaAtual() > monstro_ia->getVida()/(monstro_ia->getVida()/30)) {
+	if (monstro_ia->getVidaAtual() > monstro_ia->getVida()/(monstro_ia->getVida()/30)) {
 		jogada->setAcao(ATAQUE_FISICO);
 		jogada->setAtributo(FORCA_FISICA);
 	} else {

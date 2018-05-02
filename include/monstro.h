@@ -10,30 +10,30 @@ using std::istream;
 #include <string>
 using std::string;
 
-const string acoes[] = {"Melhorar Atributo",
-						"Ataque Físico",
+const string acoes[] = {"Ataque Físico",
 						"Ataque Mágico",
+						"Melhorar Atributo",
 						"Defesa"};
 
 enum ACAO {
-	MELHORAR_ATRIBUTO,
 	ATAQUE_FISICO,
 	ATAQUE_MAGICO,
+	MELHORAR_ATRIBUTO,
 	DEFESA
 };
 
-const string atributos[] = {"Vida Atual",
-							"Força Física",
+const string atributos[] = {"Força Física",
 							"Força Mágica",
 							"Defesa Física",
-							"Defesa Mágica"};
+							"Defesa Mágica",
+							"Vida Atual"};
 
 enum ATRIBUTO {
-	VIDA_ATUAL,
 	FORCA_FISICA,
 	FORCA_MAGICA,
 	DEFESA_FISICA,
-	DEFESA_MAGICA
+	DEFESA_MAGICA,
+	VIDA_ATUAL
 };
 
 const string classes[] = {"BALANCEADO",

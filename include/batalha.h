@@ -26,8 +26,6 @@ class Batalha {
 		Batalha();
 		~Batalha();
 
-		void setup();
-
 		void setJogada(Jogada jogada);
 
 		void setMonstro(Monstro *monstroPlayer);

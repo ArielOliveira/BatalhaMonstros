@@ -52,8 +52,8 @@ void Batalha::setJogada(Jogada jogada) {
 	}
 
 	turnos++;
-
-	Jogada jogadaIA = ia->jogadaIA();
+	
+	Jogada jogadaIA = ia->jogadaIA();	
 
 	jogar(jogadaIA, ia->getMonstro(), monstroPlayer);
 
@@ -69,6 +69,11 @@ void Batalha::setJogada(Jogada jogada) {
 		alguemMorreu = true;
 		return;
 	}
+	
+	cout << *monstroPlayer << endl;
+	cout << *ia->getMonstro() << endl;
+
+	turnos++;
 
 }
 
