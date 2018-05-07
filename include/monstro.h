@@ -48,9 +48,31 @@ enum ClasseMonstro {
 	TANKER
 };
 
+class Efeito {
+	private:
+		int duracao;
+		ATRIBUTO atributo;
+	public:
+		Efeito(ATRIBUTO atributo): atributo(atributo) {duracao = 2;}
+		Efeito(Efeito const &e) {*this = e;}
+		Efeito() {}
+		~Efeito() {}
+
+		void setEfeito(ATRIBUTO atributo) {
+			this->atributo = atributo;
+			duracao = 2;
+		}
+
+		ATRIBUTO getEfeito() {return atributo;}
+
+		int contar() {return duracao -= (duracao > 0) ? 1 : 0;}
+};
+
 class Monstro {
 	private:
 		ClasseMonstro classe;
+
+		Efeito *efeito;
 
 		int vida;
 		int vidaAtual;
@@ -60,8 +82,6 @@ class Monstro {
 
 		int defesaFisica;
 		int defesaMagica;
-
-		bool melhorouAtributo;
 
 		void ataqueMagico(Monstro *monstro);
 		void ataqueFisico(Monstro *monstro);
@@ -102,6 +122,8 @@ class Monstro {
 		friend ostream& operator<< (ostream &o, Monstro const _monstro);
 
 		friend istream& operator>> (istream &i, Monstro &_monstro);
+
+		friend void operator+ (Monstro &_monstro, Efeito &e);
 };
 
 #endif

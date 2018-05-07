@@ -35,8 +35,10 @@ void Batalha::iniciarIA() {
 }
 
 void Batalha::jogar(Jogada jogada, Monstro *monstro1, Monstro *monstro2) {
+	Efeito efeito = Efeito(jogada.getAtributo());
 	switch(jogada.getAcao()) {
 		case MELHORAR_ATRIBUTO: monstro1->acao(NULL, jogada.getAcao(), jogada.getAtributo());
+								*monstro1 + efeito;
 			break;
 		default: monstro1->acao(monstro2, jogada.getAcao(), jogada.getAtributo());
 			break;
@@ -48,10 +50,11 @@ void Batalha::setJogada(Jogada jogada) {
 
 	if (ia->getMonstro()->getVidaAtual() <= 0) {
 		alguemMorreu = true;
+		cout << "Você ganhou!" << endl;
+		cout << *ia->getMonstro() << endl;
+		turnos++;
 		return;
 	}
-
-	turnos++;
 	
 	Jogada jogadaIA = ia->jogadaIA();	
 
@@ -67,6 +70,9 @@ void Batalha::setJogada(Jogada jogada) {
 
 	if (monstroPlayer->getVidaAtual() <= 0) {
 		alguemMorreu = true;
+		cout << "IA ganhou!" << endl;
+		cout << *monstroPlayer << endl;
+		turnos++;
 		return;
 	}
 	
@@ -74,6 +80,7 @@ void Batalha::setJogada(Jogada jogada) {
 	cout << *ia->getMonstro() << endl;
 
 	turnos++;
+
 
 }
 

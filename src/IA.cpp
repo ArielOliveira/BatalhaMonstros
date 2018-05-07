@@ -26,7 +26,7 @@ Monstro* IA::getMonstro() {return monstro_ia;}
 Jogada Guerreiro::jogadaIA() {
 	Jogada jogada;
 
-	if (monstro_ia->getVidaAtual() > monstro_ia->getVida()/(monstro_ia->getVida()/30)) {
+	if (monstro_ia->getVidaAtual() > (monstro_ia->getVida()*30/100)) {
 		jogada = Jogada(ATAQUE_FISICO, FORCA_FISICA);
 	} else {
 		jogada = Jogada(MELHORAR_ATRIBUTO, VIDA_ATUAL);
@@ -38,7 +38,7 @@ Jogada Guerreiro::jogadaIA() {
 Jogada Mago::jogadaIA() {
 	Jogada jogada;
 
-	if (monstro_ia->getVidaAtual() > monstro_ia->getVida()/(monstro_ia->getVida()/30)) {
+	if (monstro_ia->getVidaAtual() > (monstro_ia->getVida()*30/100)) {
 		jogada = Jogada(ATAQUE_MAGICO, FORCA_MAGICA);
 	} else {
 		jogada = Jogada(MELHORAR_ATRIBUTO, VIDA_ATUAL);
@@ -53,7 +53,7 @@ Jogada Tanker::jogadaIA() {
 		return *jogada;
 	} 
 
-	if (monstro_ia->getVidaAtual() > monstro_ia->getVida()/(monstro_ia->getVida()/30)) {
+	if (monstro_ia->getVidaAtual() > (monstro_ia->getVida()*30/100)){
 		jogada->setAcao(ATAQUE_FISICO);
 		jogada->setAtributo(FORCA_FISICA);
 	} else {

@@ -18,6 +18,8 @@ class Batalha {
 
 		int turnos;
 
+		int monstro1Count, monstro2Count;
+
 		void iniciarIA();
 		void jogar(Jogada jogada, Monstro *monstro1, Monstro *monstro2);
 

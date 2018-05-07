@@ -6,7 +6,7 @@ using std::endl;
 
 #include "fileHandler.h"
 
-Monstro::Monstro(ClasseMonstro classe) {
+Monstro::Monstro(ClasseMonstro classe): classe(classe) {
 	ifstream file;
 	file.open("./data/classes_monstros");
 
@@ -16,10 +16,6 @@ Monstro::Monstro(ClasseMonstro classe) {
 		readFile(file, classe);
 		file >> *this;
 	}
-
-	this->classe = classe;
-
-	melhorouAtributo = false;
 
 	ID++;
 }
@@ -31,8 +27,6 @@ Monstro::Monstro() {
 	forcaMagica = 0;
 	defesaFisica = 0;
 	defesaMagica = 0;
-
-	melhorouAtributo = false;
 
 	ID++;
 }
@@ -55,17 +49,21 @@ void Monstro::defesa(Monstro *monstro, short int defesa) {
 }
 		
 void Monstro::melhorarAtributo(ATRIBUTO atributo) {
-	switch(atributo) {
-		case VIDA_ATUAL: vidaAtual += 150;
-			break;
-		case FORCA_FISICA: forcaFisica += 150;
-			break;
-		case FORCA_MAGICA: forcaMagica += 100;
-			break;
-		case DEFESA_FISICA: defesaFisica += 50;
-			break;
-		case DEFESA_MAGICA: defesaMagica += 50;
-			break;
+	if (!efeito) {
+		switch(atributo) {
+			case VIDA_ATUAL: vidaAtual += 150;
+				break;
+			case FORCA_FISICA: forcaFisica += 150;
+				break;
+			case FORCA_MAGICA: forcaMagica += 100;
+				break;
+			case DEFESA_FISICA: defesaFisica += 50;
+				break;
+			case DEFESA_MAGICA: defesaMagica += 50;
+				break;
+		}
+	} else {
+		cout << "Não posso melhorar atributo agora!" << endl;
 	}
 }
 
@@ -78,6 +76,9 @@ void Monstro::acao(Monstro *monstro, ACAO acao, ATRIBUTO atributo) {
 		case MELHORAR_ATRIBUTO: melhorarAtributo(atributo);
 			break;
 		case DEFESA: defesa(monstro, atributo);
+	}
+	if (!efeito->contar()) {
+		delete efeito;
 	}
 }
 
@@ -132,4 +133,11 @@ istream& operator>> (istream &i, Monstro &_monstro) {
 	i >> _monstro.defesaMagica;
 	
 	return i;
+}
+
+void operator+ (Monstro &_monstro, Efeito &e) {
+	if (!_monstro.efeito) {
+		_monstro.efeito = new Efeito(e);
+		cout << _monstro.efeito->getEfeito() << endl;
+	}
 }
